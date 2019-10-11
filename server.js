@@ -74,7 +74,8 @@ app.get("/scrape", function (req, res) {
     });
 
     // Send a message to the client
-    res.render("index");
+    // Not sure how to access this, tried some weird nesting and trying to set a global variable but no luck with either
+    res.render("index", dbArticle);
   });
 });
 
