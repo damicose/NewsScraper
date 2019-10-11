@@ -16,10 +16,6 @@ const PORT = 3000;
 // Initialize Express
 const app = express();
 
-// Configure middleware
-
-// Use morgan logger for logging requests
-app.use(logger("dev"));
 // Parse request body as JSON
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
@@ -42,7 +38,7 @@ mongoose.connect(MONGODB_URI);
 // Routes
 
 // A GET route for scraping the echoJS website
-app.get("/scrape", function(req, res) {
+app.get("/", function(req, res) {
   // First, we grab the body of the html with axios
   axios.get("https://jacobinmag.com").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
@@ -74,7 +70,7 @@ app.get("/scrape", function(req, res) {
     });
 
     // Send a message to the client
-    res.send("Scrape Complete");
+    res.render("index");
   });
 });
 
