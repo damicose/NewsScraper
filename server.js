@@ -11,7 +11,7 @@ const cheerio = require("cheerio");
 // Require all models
 const db = require("./models");
 
-const PORT = 3000;
+const PORT = process.env.PORT || 3000;
 
 // Initialize Express
 const app = express();
@@ -31,14 +31,14 @@ app.set("view engine", "handlebars");
 
 // *************** Connect to the Mongo DB (NEED TO CHANGE) ************
 
-const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/unit18Populater";
+const MONGODB_URI = process.env.MONGODB_URI || "mongodb://localhost/newsScrape";
 
 mongoose.connect(MONGODB_URI);
 
 // Routes
 
 // A GET route for scraping the echoJS website
-app.get("/", function(req, res) {
+app.get("/scrape", function(req, res) {
   // First, we grab the body of the html with axios
   axios.get("https://jacobinmag.com").then(function(response) {
     // Then, we load that into cheerio and save it to $ for a shorthand selector
